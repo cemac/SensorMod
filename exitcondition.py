@@ -58,7 +58,7 @@ def onexit():
     log.print('Attempting to exit in a controlled Manner \n',datetime.datetime.now(),'\n')
 
 
-    from .SensorMod import R1
+    from . import R1
     try : R1.alpha.off()
     except:None
     from . import db
@@ -70,7 +70,7 @@ def onexit():
         from . import gps
         gps.pinoff()
     except:None
-    from .SensorMod import power
+    from . import power
     power.ledon()
     sys.exit('Ending Python')
 
