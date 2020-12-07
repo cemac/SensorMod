@@ -48,7 +48,7 @@ def otherdata(date, dct):
         #clear
         draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
-        draw.text((x, top + 0), "%20s"%date, font=font, fill=255)
+        draw.text((x, top + 0), " %20s"%date, font=font, fill=255)
         
         draw.text((x, top + 8), '  | TEMP % 4dC | '%(dct[7]), font=font, fill=255)
         draw.text((x, top + 16),'  | RH % 6d | '%(dct[8]), font=font, fill=255)
@@ -66,7 +66,7 @@ def standby():
     ### end on info
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
     draw.text((x, top + 0), "%20s"%'Sensor Monitor v1.0', font=font, fill=255)
-    draw.text((x, top + 16), "  IP: %s  "%IP, font=font, fill=255)
+    draw.text((x, top + 16), "    IP: %s  "%IP, font=font, fill=255)
     draw.text((x, top + 25), "   -- standing by --   " , font=font, fill=255)
     disp.image(image)
     disp.show()
@@ -75,7 +75,7 @@ def standby():
 def shutdown():
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
     draw.text((x, top + 0), "%20s"%'Sensor Monitor v1.0', font=font, fill=255)
-    draw.text((x, top + 16),  "  IP: %s  "%IP, font=font, fill=255)
+    draw.text((x, top + 16),  "    IP: %s  "%IP, font=font, fill=255)
     draw.text((x, top + 25), "    -- shut down --    ", font=font, fill=255)
     disp.image(image)
     disp.show()  
