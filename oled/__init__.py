@@ -51,6 +51,16 @@ def standby():
     ### end on info
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
     draw.text((x, top + 0), "%20s"%'Sensor Monitor v1.0', font=font, fill=255)
-    draw.text((x, top + 16), "IP: " + IP, font=font, fill=255)
+    draw.text((x, top + 16), "     IP: " + IP, font=font, fill=255)
+    draw.text((x, top + 25), " -- standing by --  " + IP, font=font, fill=255)
     disp.image(image)
-    disp.show() 
+    disp.show()
+    
+    
+def shutdown():
+    draw.rectangle((0, 0, width, height), outline=0, fill=0)
+    draw.text((x, top + 0), "%20s"%'Sensor Monitor v1.0', font=font, fill=255)
+    draw.text((x, top + 16), "     IP: " + IP, font=font, fill=255)
+    draw.text((x, top + 25), "    -- shut down --    ", font=font, fill=255)
+    disp.image(image)
+    disp.show()  
