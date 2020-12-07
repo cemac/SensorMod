@@ -61,7 +61,7 @@ def onexit():
     from . import R1
     try : R1.alpha.off()
     except:None
-    from . import db
+    from .. import db
     try:db.conn.commit()
     except db.sqlite3.ProgrammingError: None
     try:db.conn.close()
