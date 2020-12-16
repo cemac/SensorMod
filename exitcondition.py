@@ -75,7 +75,7 @@ def onexit():
     
     try:
     from .SensorMod.oled import standby
-    standby(message = "   -- ZAPP --   ")
+    standby(message = "   -- ZAAPP. --   ")
     except ImportError:None
     
     sys.exit('Ending Python')
