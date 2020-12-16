@@ -72,6 +72,12 @@ def onexit():
     except:None
     from . import power
     power.ledon()
+    
+    try:
+    from .SensorMod.oled import standby
+    standby(message = "   -- ZAPP --   ")
+    except ImportError:None
+    
     sys.exit('Ending Python')
 
 import atexit
