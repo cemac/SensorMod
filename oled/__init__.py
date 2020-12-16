@@ -68,12 +68,12 @@ def otherdata(date, dct):
 ## str(datetime.utcnow()).split('.')[0]
 
 
-def standby():
+def standby(message = "   -- standing by --   "):
     ### end on info
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
     draw.text((x, top + 0), "%20s"%'Sensor Monitor v1.0', font=font, fill=255)
     draw.text((x, top + 16), "    IP: %s  "%IP, font=font, fill=255)
-    draw.text((x, top + 25), "   -- standing by --   " , font=font, fill=255)
+    draw.text((x, top + 25), message , font=font, fill=255)
     disp.image(image)
     disp.show()
     
