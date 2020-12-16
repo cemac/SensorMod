@@ -8,6 +8,10 @@ os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
 i2c = I2C(2) # use software bus i2c-2
 
 ### setup ###
+if '3c' not in os.popen('i2detect -y 2').read()
+        raise ImportError
+
+
 # os.system('i2cdetect -y 2') # to get addr
 
 disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, addr=0x3c)
