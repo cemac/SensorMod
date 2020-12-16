@@ -5,12 +5,10 @@ from adafruit_extended_bus import ExtendedI2C as I2C
 
 # Create library object using our Extended Bus I2C port
 os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
-i2c = I2C(2) # use software bus i2c-2
-
 ### setup ###
-if '3c' not in os.popen('i2detect -y 2').read():
+if '3c' not in os.popen('i2cdetect -y 2').read():
         raise ImportError
-
+i2c = I2C(2) # use software bus i2c-2
 
 # os.system('i2cdetect -y 2') # to get addr
 
