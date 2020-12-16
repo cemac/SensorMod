@@ -1,7 +1,8 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
-import adafruit_ssd1306
 from adafruit_extended_bus import ExtendedI2C as I2C
+import adafruit_ssd1306
+
 
 # Create library object using our Extended Bus I2C port
 os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
