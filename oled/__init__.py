@@ -1,12 +1,15 @@
-from board import SCL, SDA
-import busio,os
+import os
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
+from adafruit_extended_bus import ExtendedI2C as I2C
 
+# Create library object using our Extended Bus I2C port
+os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
+i2c = I2C(2) # use software bus i2c-2
 
 ### setup ###
-# os.system('i2cdetect -y 1') # to get addr
-i2c = busio.I2C(SCL, SDA)
+# os.system('i2cdetect -y 2') # to get addr
+
 disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c, addr=0x3c)
 disp.fill(0)
 disp.show()
