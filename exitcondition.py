@@ -74,8 +74,8 @@ def onexit():
     power.ledon()
     
     try:
-    from .SensorMod.oled import standby
-    standby(message = "   -- ZAAPP. --   ")
+        from .SensorMod.oled import standby
+        standby(message = "   -- ZAAPP. --   ")
     except ImportError:None
     
     sys.exit('Ending Python')
