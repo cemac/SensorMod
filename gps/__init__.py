@@ -57,8 +57,12 @@ def connect():
                 log.debug( 'Connected serial on /dev/ttyACM%d'%i)
                 break
             except:continue
-    ser.flushInput()
-    ser.flushOutput()
+    try:
+        ser.flushInput()
+        ser.flushOutput()
+        return True
+    except:
+        return False
 
 
 def bg_poll(ser,lock,stop_event):
@@ -95,7 +99,8 @@ def latlon():
 def init(wait = False):
 
 
-    connect()
+    if not connect():
+        return False
     log.info('############# GPS daemon ############')
     stop_event.clear()
 
