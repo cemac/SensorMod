@@ -13,6 +13,10 @@ if '--'in readval and '3c' not in readval:
         print(readval)
         if '--'in readval and '3c' not in readval:
                 raise ImportError
+else:
+        raise ImportError
+        
+        
 i2c = I2C(2) # use software bus i2c-2
 
 # os.system('i2cdetect -y 2') # to get addr
