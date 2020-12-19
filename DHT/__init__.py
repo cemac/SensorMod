@@ -1,9 +1,9 @@
 '''
 Left rail from the top 
 
-4th - output
-5th - gnd
-6th - vin
+4th - output  (7)
+5th - gnd     (9)
+6th - vin     (11)
 
 '''
 
