@@ -10,6 +10,7 @@ if '--'in readval and '3c' not in readval:
         os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
         ### setup ### 
         readval = os.popen('i2cdetect -y 2').read()
+        print(readval)
         if '--'in readval and '3c' not in readval:
                 raise ImportError
 i2c = I2C(2) # use software bus i2c-2
