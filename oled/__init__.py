@@ -5,10 +5,11 @@ import adafruit_ssd1306
 
 
 # Create library object using our Extended Bus I2C port
-os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
-### setup ###
 if '3c' not in os.popen('i2cdetect -y 2').read():
-        raise ImportError
+        os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
+        ### setup ###
+        if '3c' not in os.popen('i2cdetect -y 2').read():
+                raise ImportError
 i2c = I2C(2) # use software bus i2c-2
 
 # os.system('i2cdetect -y 2') # to get addr
