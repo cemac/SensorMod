@@ -28,7 +28,7 @@ pinoff()
 pinon()
 
 
-DHT_SENSOR = Adafruit_DHT.DHT11 #DHT22
+DHT_SENSOR = Adafruit_DHT.DHT22 #DHT22 11
 
 def read():
     # humidity, temperature = 
