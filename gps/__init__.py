@@ -71,6 +71,7 @@ def bg_poll(ser,lock,stop_event):
         params = 'utc gpstime lat utc lon utc fix nsat HDOP alt utc WGS84 utc lastDGPS utc utc'.split()
         while not stop_event.is_set():
                 try:
+                    time.sleep(1)
                     line = str(ser.readline())
 
                 except serial.SerialException:
