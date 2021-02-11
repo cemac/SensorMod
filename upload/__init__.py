@@ -11,7 +11,7 @@ def online():
 
     cmd = '''
     PINGS=2
-    TESTIP=8.8.8.8
+    TESTIP=10.3.141.1
     if ( ping -c $PINGS $TESTIP > /dev/null ) then
         echo "1"
     else
@@ -175,7 +175,7 @@ def sync(SERIAL,conn):
         try:
             with pysftp.Connection(host="10.3.141.1", username="serverpi", private_key=private_key, private_key_pass=key_pass, cnopts=cnopts) as srv:
                 print ("Connection Open")
-                srv.timeout(10.0)
+                #srv.timeout(10.0)
                 if srv.exists(destination):
                     srv.chdir(destination)
                     print("Uploading db file to serverpi")
