@@ -153,24 +153,21 @@ class sqlMerge(object):
 
     # Sharepoint upload - requires uname and password in plain text
 
-    def upload_sp (self, file_name, username, password):
+    def upload_sp (self, localpath, username, password):
 
         from office365.runtime.auth.authentication_context import AuthenticationContext
-        from office365.runtime.auth.user_credential import UserCredential
         from office365.sharepoint.client_context import ClientContext
         from datetime import datetime
 
         baseurl = 'https://leeds365.sharepoint.com'
         basesite = '/sites/TEAM-BiB-Breathes'
         siteurl = baseurl + basesite
-        localpath = file_name
+        file_name  = path.split(localpath)[1]
         timestamp=datetime.utcnow().strftime("%Y%m%d%H%M%S")
-        remotepath = 'Shared%20Documents/db_files/server_{}.db'.format(timestamp)
-        credentials = UserCredential(username, password)
-        #ctx_auth = AuthenticationContext(siteurl)
-        #ctx_auth.acquire_token_for_user(username, password)
-        #ctx = ClientContext(siteurl, ctx_auth)
-        ctx = ClientContext(siteurl).with_credentials(credentials)
+        remotepath = 'Shared%20Documents/db_files/{}'.format(file_name)
+        ctx_auth = AuthenticationContext(siteurl)
+        ctx_auth.acquire_token_for_user(username, password)
+        ctx = ClientContext(siteurl, ctx_auth)
         with open(localpath, 'rb') as content_file:
             file_content = content_file.read()
 
