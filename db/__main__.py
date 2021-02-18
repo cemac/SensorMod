@@ -1,9 +1,9 @@
 '''
 If we do not already have a database (or wish to delete and replace the existing one) run
 
-python -m serverpi.db new
+python -m {sensor|server}pi.SensorMod.db new
             or
-python -m serverpi.db + user input
+python -m {sensor|server}pi.SensorMod.db + user input
 
 '''
 
