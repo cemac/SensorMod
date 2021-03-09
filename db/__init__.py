@@ -1,8 +1,9 @@
 import sqlite3,os,socket
 
 hostname = socket.gethostname()
+hostname = hostname.upper().lower()
 
-if "BBServer" in hostname:
+if "bbserver" in hostname:
     filename = '/server.db'
 else:
     filename = '/sensor.db'
