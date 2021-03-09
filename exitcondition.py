@@ -51,33 +51,33 @@ def onexit():
         log.critical("death by sys.exit(%d)" % hooks.exit_code)
     elif hooks.exception is not None:
         log.critical("death by exception: %s" % hooks.exception)
-        
+
     else:
         log.critical("natural death")
 
     log.print('Attempting to exit in a controlled Manner \n',datetime.datetime.now(),'\n')
 
 
-    from . import R1
+    from .SensorMod import R1
     try : R1.alpha.off()
     except:None
-    from . import db
+    from .SensorMod import db
     try:db.conn.commit()
     except db.sqlite3.ProgrammingError: None
     try:db.conn.close()
     except:None
     try:
-        from . import gps
+        from .SensorMod import gps
         gps.pinoff()
     except:None
-    from . import power
+    from .SensorMod import power
     power.ledon()
-    
+
     try:
         from .SensorMod.oled import standby
         standby(message = "   -- ZAAPP. --   ")
     except ImportError:None
-    
+
     sys.exit('Ending Python')
 
 import atexit
