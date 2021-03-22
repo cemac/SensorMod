@@ -58,23 +58,23 @@ def onexit():
     log.print('Attempting to exit in a controlled Manner \n',datetime.datetime.now(),'\n')
 
 
-    from .SensorMod import R1
+    from . import R1
     try : R1.alpha.off()
     except:None
-    from .SensorMod import db
+    from . import db
     try:db.conn.commit()
     except db.sqlite3.ProgrammingError: None
     try:db.conn.close()
     except:None
     try:
-        from .SensorMod import gps
+        from . import gps
         gps.pinoff()
     except:None
-    from .SensorMod import power
+    from . import power
     power.ledon()
 
     try:
-        from .SensorMod.oled import standby
+        from ..oled import standby
         standby(message = "   -- ZAAPP. --   ")
     except ImportError:None
 
