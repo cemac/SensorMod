@@ -106,6 +106,7 @@ class sqlMerge(object):
             makedirs(savepath)
 
         success=self.upload_s3(file_a,'bib-pilot-bucket',uploadfile)
+        #success=self.upload_sp(file_a)
 
         if success:
 
@@ -151,14 +152,17 @@ class sqlMerge(object):
             return False
         return True
 
-    # Sharepoint upload - requires uname and password in plain text
+    # Sharepoint upload
 
-    def upload_sp (self, localpath, username, password):
+    def upload_sp (self, localpath):
 
         from office365.runtime.auth.authentication_context import AuthenticationContext
         from office365.sharepoint.client_context import ClientContext
         from datetime import datetime
+        from os import environ
 
+        username = environ['SP_UNAME']
+        password = environ['SP_PASSWORD']
         baseurl = 'https://leeds365.sharepoint.com'
         basesite = '/sites/TEAM-BiB-Breathes'
         siteurl = baseurl + basesite
