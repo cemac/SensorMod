@@ -95,7 +95,6 @@ class sqlMerge(object):
 
         hostname = os.popen('hostname').read().strip()
 
-        #uploadfile = '.'.join(file_a.split('.')[:-1])+timestamp+'.'+file_a.split('.')[-1] # filename with timestamp added, preserving all . characters
         uploadfile = "upload_"+hostname+"_"+timestamp+".db"
 
         savepath = '/home/serverpi/uploadedData'
