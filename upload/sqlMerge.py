@@ -104,8 +104,8 @@ class sqlMerge(object):
                 + ' does not exist\nAttempting to create:')
             makedirs(savepath)
 
-        success=self.upload_s3(file_a,'bib-pilot-bucket',uploadfile)
-        #success=self.upload_sp(file_a)
+        #success=self.upload_s3(file_a,'bib-pilot-bucket',uploadfile)
+        success=self.upload_sp(file_a)
 
         if success:
 
