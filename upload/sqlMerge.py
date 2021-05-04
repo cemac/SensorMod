@@ -158,11 +158,15 @@ class sqlMerge(object):
         from office365.runtime.auth.authentication_context import AuthenticationContext
         from office365.sharepoint.client_context import ClientContext
         from datetime import datetime
-        from os import environ, path
+        from os import path
 
-        username = environ['SP_UNAME']
+        with open ("/root/.params","r") as f:
+            lines=f.readlines()
+            lines=[x.strip() for x in lines]
+
+        username = lines[1]
         print ("Username = {}".format(username))
-        password = environ['SP_PASSWORD']
+        password = lines[2]
         print ("Password = {}",format(password))
         baseurl = 'https://leeds365.sharepoint.com'
         basesite = '/sites/TEAM-BiB-Breathes'
