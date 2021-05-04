@@ -165,20 +165,27 @@ class sqlMerge(object):
             lines=[x.strip() for x in lines]
 
         username = lines[1]
-        print ("Username = {}".format(username))
         password = lines[2]
-        print ("Password = {}",format(password))
         baseurl = 'https://leeds365.sharepoint.com'
         basesite = '/sites/TEAM-BiB-Breathes'
         siteurl = baseurl + basesite
         file_name  = path.split(localpath)[1]
         timestamp=datetime.utcnow().strftime("%Y%m%d%H%M%S")
         remotepath = 'Shared%20Documents/db_files/{}'.format(file_name)
-        ctx_auth = AuthenticationContext(siteurl)
-        ctx_auth.acquire_token_for_user(username, password)
-        ctx = ClientContext(siteurl, ctx_auth)
+        try:
+            ctx_auth = AuthenticationContext(siteurl)
+            ctx_auth.acquire_token_for_user(username, password)
+            ctx = ClientContext(siteurl, ctx_auth)
+        except:
+            return False
+
         with open(localpath, 'rb') as content_file:
             file_content = content_file.read()
 
         dir, name = path.split(remotepath)
-        file = ctx.web.get_folder_by_server_relative_url(dir).upload_file(name, file_content).execute_query()
+        try:
+            file = ctx.web.get_folder_by_server_relative_url(dir).upload_file(name, file_content).execute_query()
+        except:
+            return False
+
+        return True
