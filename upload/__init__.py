@@ -149,7 +149,6 @@ def copydb(file_name,SERIAL):
 
 def sync(SERIAL,conn):
 
-    import pysftp
     from time import sleep
     from random import randint
 
@@ -161,14 +160,7 @@ def sync(SERIAL,conn):
     if user == 'root': __RDIR__ = '/root'
     else: __RDIR__ = '/home/'+user
 
-    key_pass = readpassphrase(__RDIR__)
-
-    cnopts = pysftp.CnOpts()
-    cnopts.hostkeys = None
-
     db_file_path = os.path.join(__RDIR__,'sensor.db')
-
-    private_key = os.path.join(__RDIR__,".ssh/id_rsa")  # can use password keyword in Connection instead
 
     if not os.path.exists(db_file_path):
         print ("Could not find the db file to upload")
@@ -179,10 +171,24 @@ def sync(SERIAL,conn):
     except:
         print ("Failed to make a local copy of db file")
 
-    timestamp = upload_file[-17:-3]
-
     destination = "/home/serverpi/datastaging"
     source = upload_file
+
+    success=transfer(source, destination,__RDIR__)
+
+    return success
+    
+
+def transfer (source, destination, __RDIR__):
+
+    import pysftp
+
+    private_key = os.path.join(__RDIR__,".ssh/id_rsa")  # can use password keyword in Connection instead
+
+    key_pass = readpassphrase(__RDIR__)
+
+    cnopts = pysftp.CnOpts()
+    cnopts.hostkeys = None
 
     for i in range (10):
         try:

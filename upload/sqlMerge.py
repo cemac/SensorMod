@@ -105,7 +105,7 @@ class sqlMerge(object):
             makedirs(savepath)
 
         #success=self.upload_s3(file_a,'bib-pilot-bucket',uploadfile)
-        success=self.upload_sp(file_a)
+        success=self.upload_sp(file_a, uploadfile)
 
         if success:
 
@@ -153,7 +153,7 @@ class sqlMerge(object):
 
     # Sharepoint upload
 
-    def upload_sp (self, localpath):
+    def upload_sp (self, localpath, object_name=None):
 
         from office365.runtime.auth.authentication_context import AuthenticationContext
         from office365.sharepoint.client_context import ClientContext
@@ -169,7 +169,10 @@ class sqlMerge(object):
         baseurl = 'https://leeds365.sharepoint.com'
         basesite = '/sites/TEAM-BiB-Breathes'
         siteurl = baseurl + basesite
-        file_name  = path.split(localpath)[1]
+        if object_name is None:
+            file_name  = path.split(localpath)[1]
+        else:
+            file_name = object_name
         timestamp=datetime.utcnow().strftime("%Y%m%d%H%M%S")
         remotepath = 'Shared%20Documents/db_files/{}'.format(file_name)
         try:
