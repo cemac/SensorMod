@@ -161,7 +161,9 @@ class sqlMerge(object):
         from os import environ
 
         username = environ['SP_UNAME']
+        print ("Username = {}".format(username))
         password = environ['SP_PASSWORD']
+        print ("Password = {}",format(password))
         baseurl = 'https://leeds365.sharepoint.com'
         basesite = '/sites/TEAM-BiB-Breathes'
         siteurl = baseurl + basesite
