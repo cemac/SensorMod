@@ -158,7 +158,7 @@ class sqlMerge(object):
         from office365.runtime.auth.authentication_context import AuthenticationContext
         from office365.sharepoint.client_context import ClientContext
         from datetime import datetime
-        from os import environ
+        from os import environ, path
 
         username = environ['SP_UNAME']
         password = environ['SP_PASSWORD']
@@ -174,5 +174,5 @@ class sqlMerge(object):
         with open(localpath, 'rb') as content_file:
             file_content = content_file.read()
 
-        dir, name = os.path.split(remotepath)
+        dir, name = path.split(remotepath)
         file = ctx.web.get_folder_by_server_relative_url(dir).upload_file(name, file_content).execute_query()
