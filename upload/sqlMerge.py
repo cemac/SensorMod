@@ -179,7 +179,8 @@ class sqlMerge(object):
             ctx_auth = AuthenticationContext(siteurl)
             ctx_auth.acquire_token_for_user(username, password)
             ctx = ClientContext(siteurl, ctx_auth)
-        except:
+        except Exception as e:
+            print (e)
             return False
 
         with open(localpath, 'rb') as content_file:
@@ -188,7 +189,8 @@ class sqlMerge(object):
         dir, name = path.split(remotepath)
         try:
             file = ctx.web.get_folder_by_server_relative_url(dir).upload_file(name, file_content).execute_query()
-        except:
+        except Exception as e:
+            print (e)
             return False
 
         return True
