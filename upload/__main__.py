@@ -1,6 +1,6 @@
 from os import remove, popen
 from .__init__ import transfer
-from .sqlMerge import upload_sp
+from .sqlMerge import sqlMerge
 from datetime import datetime
 
 import socket
@@ -16,13 +16,14 @@ if user == 'root': __RDIR__ = '/root'
 else: __RDIR__ = '/home/'+user
 
 filename = '/testfile'+hostname+'.txt'
+source = __RDIR__+filename
 
-with open (__RDIR__+filename,'w') as f:
+with open (source,'w') as f:
     f.write ('File transfered from '+hostname+' at '+timestamp )
 
 if 'BBServer' in hostname:
 
-    if upload_sp(__RDIR__+'/testfile.txt'):
+    if upload_sp(localpath=source):
         print ('Upload-to-Sharepoint test passed!')
     else:
         print ('Upload-to-Sharepoint test failed!')
@@ -30,7 +31,6 @@ if 'BBServer' in hostname:
 
 else:
 
-    source = __RDIR__+'/testfile.txt'
     destination = "/home/serverpi/datastaging"
 
     if transfer(source, destination, __RDIR__):

@@ -152,8 +152,8 @@ class sqlMerge(object):
         return True
 
     # Sharepoint upload
-
-    def upload_sp (self, localpath, object_name=None):
+    @staticmethod
+    def upload_sp (localpath, object_name=None):
 
         from office365.runtime.auth.authentication_context import AuthenticationContext
         from office365.sharepoint.client_context import ClientContext
