@@ -23,7 +23,7 @@ with open (source,'w') as f:
 
 if 'BBServer' in hostname:
 
-    if upload_sp(localpath=source):
+    if sqlMerge.upload_sp(localpath=source):
         print ('Upload-to-Sharepoint test passed!')
     else:
         print ('Upload-to-Sharepoint test failed!')
