@@ -1,3 +1,7 @@
+'''
+Obtaining the gelocational position using the closest internet node. This is used for static sensors.
+'''
+
 import os
 alt=0
 try:

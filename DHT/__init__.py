@@ -1,5 +1,8 @@
 '''
-Left rail from the top 
+Functions for setting up an external density and humity module.
+
+### GPIO pin wiring
+Left rail from the top
 
 4th - output  (7)
 5th - gnd     (9)
@@ -23,14 +26,13 @@ def pinon():
 def pinoff():
     GPIO.setup(pin, GPIO.IN)
     time.sleep(1)
-    
-pinoff()    
+
+pinoff()
 pinon()
 
 
 DHT_SENSOR = Adafruit_DHT.DHT22 #DHT22 11
 
 def read():
-    # humidity, temperature = 
+    # humidity, temperature =
     return Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-    

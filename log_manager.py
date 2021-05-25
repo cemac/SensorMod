@@ -1,5 +1,13 @@
 '''
 The logging file
+
+This file controls all the logging functions.
+
+
+- The `console_level` parameter defines de degree of logs make it to the stdout.
+- Logfile output is stored in the `logfile` parameter. All error levels are written to this file.
+- Finally the print function is rewritten and replaced by log.INFO call.
+
 '''
 
 import logging,os
@@ -31,10 +39,10 @@ tofile = logging.FileHandler(logfile, mode='a')
 formatter = logging.Formatter('%(asctime)s ~ %(name)s ~ %(levelname)s ~ %(message)s')
 tofile.setFormatter(formatter)
 tofile.setLevel(logging.DEBUG)
-  
 
-  
-  
+
+
+
 
 def getlog(name):
   '''
@@ -42,19 +50,19 @@ def getlog(name):
   '''
   name = str(name)
   if name=='': name = 'unknown'
-  
+
   log = logging.getLogger(name) ## if running interactively with ipython, replace this with a descriptive string
   log.propagate = False
   log.setLevel(logging.DEBUG)
-  
+
   '''
   Remove any pre-existing handlers
   '''
 
   while len(log.handlers):
     log.removeHandler(log.handlers[0])
-    
-    
+
+
   '''
   Console Stream
   '''
@@ -64,15 +72,15 @@ def getlog(name):
   File Debug
   '''
   log.addHandler(tofile)
-  
+
   '''
   Make log printlike
   '''
-  def print(*argv): 
-    return log.info(' '.join(map(str,argv))) 
-  
+  def print(*argv):
+    return log.info(' '.join(map(str,argv)))
+
   log.print = print
-  
-  
-  
+
+
+
   return log

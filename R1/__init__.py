@@ -1,3 +1,8 @@
+'''
+A sample R1 test script
+Not currently used?
+'''
+
 import spidev
 import opc
 from time import sleep

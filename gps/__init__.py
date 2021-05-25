@@ -1,12 +1,11 @@
 '''
-Get GPS values from usb
+A script to run a thread polling GPS sensors for the current location.
+
+- If you are using a USB gps unit set `gpio = False`.
 
 
-If using usb set gpio = False
 
-
-
-screen /dev/ttyS0 9600
+For a quick check we can look at `screen /dev/ttyS0 9600`
 '''
 
 import RPi.GPIO as GPIO
@@ -43,6 +42,9 @@ if gpio: pinon()
 __all__ = 'last ser gpio connect bg_poll latlon'.split()
 
 def connect():
+    '''
+    A function to ensure we are recieving information from the GPS unit
+    '''
     global ser,gpio
     if gpio:
         ser = serial.Serial('/dev/ttyS0')#,9600)
@@ -66,6 +68,14 @@ def connect():
 
 
 def bg_poll(ser,lock,stop_event):
+        '''
+        The background function which continuously polls the GPS unit within a separate thread.
+
+        It is worth noting that eventhough we run this separately, the RPi Zero only has one core, so this ends up being multiplexed instead.
+        A better solution for this may have been using async, however since the code can just as easily run on an RPI3, the multithreading seemed a more practical solution for code robustness
+        '''
+
+
         global last,stopThread
         #ignored values to be named utc
         params = 'utc gpstime lat utc lon utc fix nsat HDOP alt utc WGS84 utc lastDGPS utc utc'.split()
@@ -90,6 +100,9 @@ def bg_poll(ser,lock,stop_event):
 
 
 def latlon():
+    '''
+    If there are no lat/lon results return 0
+    '''
     global last
     if last['lat']=='' or last['lon']=='':
         return [0,0]
@@ -98,7 +111,9 @@ def latlon():
 
 
 def init(wait = False):
-
+    '''
+    A function to start the GPS threads
+    '''
 
     if not connect():
         return False

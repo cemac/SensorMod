@@ -1,5 +1,8 @@
 '''
-Ensure we can do a controlled exit when pressing ctrl+c
+This script handles what the program does on a hard error or GPIO intterupt signals using the ExitHooks class.
+
+
+[Ensure we can do a controlled exit when pressing ctrl+c]
 '''
 ### Failure on exit params
 import sys,time,datetime,traceback
@@ -25,6 +28,9 @@ On Hard Exit
 
 class ExitHooks(object):
     def __init__(self):
+        '''
+        Hooks to control program termination.
+        '''
         self.exit_code = None
         self.exception = None
 

@@ -1,5 +1,6 @@
 '''
-scripts to run if connected online
+The scripts that if we are connected online.
+These include checks, database rebuilds and uploads
 '''
 import os
 from datetime import date,datetime
@@ -8,6 +9,9 @@ log = getlog(__file__)
 print = log.print
 
 def online():
+    '''
+    Checks if we are online
+    '''
 
     cmd = '''
     PINGS=2
@@ -22,6 +26,9 @@ def online():
     return int(os.popen(cmd).read())
 
 def connected():
+    '''
+    Checks if we are within range of the base sensor unit
+    '''
     cmd = '''
     PINGS=2
     TESTIP=10.3.141.1
@@ -36,6 +43,9 @@ def connected():
 
 
 def readpassphrase(__RDIR__):
+    '''
+    Reads the passphrase
+    '''
 
     with open (os.path.join(__RDIR__,'.serverpi')) as f:
         lines = f.readlines()
@@ -46,6 +56,9 @@ def readpassphrase(__RDIR__):
     return private_key_pass
 
 def buildtables(conn):
+    '''
+    The function used to rebuild the tables
+    '''
 
     conn.execute('''
                  CREATE TABLE MEASUREMENTS
@@ -80,7 +93,9 @@ def buildtables(conn):
     return
 
 def copydb(file_name,SERIAL):
-
+    '''
+    A function to copy the databases
+    '''
     import sqlite3
 
     DATE = date.today().strftime("%d%m%Y")
@@ -148,6 +163,9 @@ def copydb(file_name,SERIAL):
 
 
 def sync(SERIAL,conn):
+    '''
+    Making sure that the two devices are in sync
+    '''
 
     from time import sleep
     from random import randint
@@ -177,9 +195,12 @@ def sync(SERIAL,conn):
     success=transfer(source, destination,__RDIR__)
 
     return success
-    
+
 
 def transfer (source, destination, __RDIR__):
+    '''
+    SFTP transfer of databases to the server
+    '''
 
     import pysftp
 
@@ -227,6 +248,9 @@ def transfer (source, destination, __RDIR__):
     return success
 
 def stage(SERIAL,__RDIR__):
+    '''
+    Staging the information from each device database
+    '''
 
     import sqlite3
     from datetime import datetime, date
@@ -310,6 +334,9 @@ def stage(SERIAL,__RDIR__):
     return success
 
 def upload():
+    '''
+    Uploading the data
+    '''
 
     from .sqlMerge import sqlMerge
     from glob import glob

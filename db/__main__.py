@@ -1,4 +1,7 @@
 '''
+A script to generate a new database and delete the old one. This is used on intiation, after a copy or a corruption.
+
+#### Commands:
 If we do not already have a database (or wish to delete and replace the existing one) run
 
 python -m {sensor|server}pi.SensorMod.db new

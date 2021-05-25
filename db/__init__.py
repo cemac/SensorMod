@@ -1,4 +1,7 @@
 import sqlite3,os,socket
+'''
+The generic database naming and connection tools
+'''
 
 hostname = socket.gethostname()
 hostname = hostname.upper().lower()

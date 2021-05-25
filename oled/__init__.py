@@ -1,3 +1,10 @@
+'''
+A series of functions to display results on a $3 OLED screen connected to the software SPI ports on the PI.
+
+This code should be activates should such a display be detected on code startup
+'''
+
+
 import os
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_extended_bus import ExtendedI2C as I2C
@@ -8,15 +15,15 @@ import adafruit_ssd1306
 readval = os.popen('i2cdetect -y 2').read()
 if '--'in readval and '3c' not in readval:
         os.system('dtoverlay i2c-gpio bus=2 i2c_gpio_sda=22 i2c_gpio_scl=23')
-        ### setup ### 
+        ### setup ###
         readval = os.popen('i2cdetect -y 2').read()
         print(readval)
         if '--'in readval and '3c' not in readval:
                 raise ImportError
 else:
         raise ImportError
-        
-        
+
+
 i2c = I2C(2) # use software bus i2c-2
 
 # os.system('i2cdetect -y 2') # to get addr
@@ -48,31 +55,31 @@ def updatedata(date, dct):
         draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
         draw.text((x, top + 0), "%20s"%date, font=font, fill=255)
-        
+
         draw.text((x, top + 8), '  | PM1   % .2e | '%(dct[4]), font=font, fill=255)
         draw.text((x, top + 16),'  | PM2.5  %.2e | '%(dct[5]), font=font, fill=255)
         draw.text((x, top + 25), '  | PM10  % .2e | '%(dct[6]), font=font, fill=255)
-        
+
         # Display image.
         disp.image(image)
         disp.show()
-        
+
 
 def otherdata(date, dct):
         #clear
         draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
         draw.text((x, top + 0), " %20s"%date, font=font, fill=255)
-        
+
         draw.text((x, top + 8), '  | TEMP % 4dC | '%(dct[7]), font=font, fill=255)
         draw.text((x, top + 16),'  | RH % 6d | '%(dct[8]), font=font, fill=255)
         draw.text((x, top + 25), '  | X % 7d | '%(dct[10]), font=font, fill=255)
-        
+
         # Display image.
         disp.image(image)
         disp.show()
-        
-        
+
+
 ## str(datetime.utcnow()).split('.')[0]
 
 
@@ -84,12 +91,12 @@ def standby(message = "   -- standing by --   "):
     draw.text((x, top + 25), message , font=font, fill=255)
     disp.image(image)
     disp.show()
-    
-    
+
+
 def shutdown():
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
     draw.text((x, top + 0), "%20s"%'Sensor Monitor v1.0', font=font, fill=255)
     draw.text((x, top + 16),  "    IP: %s  "%IP, font=font, fill=255)
     draw.text((x, top + 25), "    -- shut down --    ", font=font, fill=255)
     disp.image(image)
-    disp.show()  
+    disp.show()
