@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# pip install pdoc3
+# pip3 install pdoc3
 # note this needs to be run on the pi where all the code can execute sucessfully 
 
 $(mkdir $(pwd)/documentation);
 
-$(pdoc --html $(pwd) --output-dir $(pwd)/documentation)
+$(PYTHONPATH=$(pwd) pdoc $(pwd) --output-dir $(pwd)/documentation)
